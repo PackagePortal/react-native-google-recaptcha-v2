@@ -21,7 +21,7 @@ const patchPostMessageJsCode = `(${String(function () {
  * @param {*} languageCode: can be found at https://developers.google.com/recaptcha/docs/language
  * @param {*} cancelButtonText: title of cancel button
  */
-const GoogleReCaptcha = ({ onMessage, siteKey, style, url, languageCode, cancelButtonText = 'Cancel' }) => {
+const GoogleReCaptcha = ({ onMessage, siteKey, style, url, languageCode, cancelButtonText = 'Cancel', ...rest }) => {
 	const generateTheWebViewContent = siteKey => {
 		const originalForm =
 			`<!DOCTYPE html>
@@ -93,6 +93,7 @@ const GoogleReCaptcha = ({ onMessage, siteKey, style, url, languageCode, cancelB
 				html: generateTheWebViewContent(siteKey),
 				baseUrl: `${url}`,
 			}}
+			{...rest}
 		/>
 	);
 }
